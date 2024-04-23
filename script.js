@@ -5,8 +5,9 @@ const restartBtn = document.querySelector("#resetBtn");
 
 
 let board = [];
-const playerX = "X"
-const playerO = "O"
+let gameEnded = false;
+const playerX = "X";
+const playerO = "O";
 
 function displayController(currentPlayer) {
   message.innerHTML = `Player ${currentPlayer}'s turn`
@@ -18,19 +19,23 @@ function gameController() {
 
   field.forEach(field => {
     field.addEventListener("click", function () {
-      if (!field.innerHTML) {
-        if (currentPlayer === playerX) {
-          field.innerHTML = "X";
-          board.push(Number(field.dataset.number));
-          currentPlayer = playerO;
-          displayController(currentPlayer);
-          checkWinner(currentPlayer);
-        } else if (currentPlayer === playerO) {
-          field.innerHTML = "O";
-          board.push(Number(field.dataset.number));
-          currentPlayer = playerX;
-          displayController(currentPlayer);
-          checkWinner(currentPlayer);          
+      if (gameEnded) {
+        return;
+      } else {
+        if (!field.innerHTML) {
+          if (currentPlayer === playerX) {
+            field.innerHTML = "X";
+            board.push(Number(field.dataset.number));
+            currentPlayer = playerO;
+            displayController(currentPlayer);
+            checkWinner(currentPlayer);
+          } else if (currentPlayer === playerO) {
+            field.innerHTML = "O";
+            board.push(Number(field.dataset.number));
+            currentPlayer = playerX;
+            displayController(currentPlayer);
+            checkWinner(currentPlayer);
+          }
         }
       }
     });
@@ -59,14 +64,17 @@ function checkWinner() {
       field[a].innerHTML === field[b].innerHTML &&
       field[b].innerHTML === field[c].innerHTML
     ) {
+      gameEnded = true;
       const currentPlayer = field[a].innerHTML;
       message.innerHTML = `Player ${currentPlayer} wins!`;
+      return;
     }
   }
 
-  // If no winner is found and all fields are filled, it's a draw
   if (board.length === field.length) {
+    gameEnded = true;
     message.innerHTML = "It's a draw!";
+    return;
   }
 }
 
@@ -77,6 +85,7 @@ function restartGame() {
   });
   currentPlayer = playerX;
   displayController(currentPlayer);
+  gameEnded = false;
 }
 
 
