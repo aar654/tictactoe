@@ -30,7 +30,7 @@ function gameController() {
           board.push(Number(field.dataset.number));
           currentPlayer = playerX;
           displayController(currentPlayer);
-          checkWinner(currentPlayer);
+          checkWinner(currentPlayer);          
         }
       }
     });
@@ -72,12 +72,11 @@ function checkWinner() {
 
 function restartGame() {
   board = [];
-  currentPlayer = playerX;
-  displayController(currentPlayer);
-
   field.forEach((field) => {
     field.innerHTML = "";
   });
+  currentPlayer = playerX;
+  displayController(currentPlayer);
 }
 
 
