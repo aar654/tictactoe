@@ -1,0 +1,40 @@
+body{
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+}
+
+#gameBoard{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 400px;
+    width: 400px;
+    border-style: solid;        
+}
+
+.field{
+    display: grid;
+    border-style: solid;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 75px;
+}
+
+.field:hover{
+    border-color: red;
+}
+
+#resetBtn{
+    margin-top: 50px;
+    background-color: orange;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+#resetBtn:hover{
+    background-color: rgb(163, 106, 1);
+}
+
